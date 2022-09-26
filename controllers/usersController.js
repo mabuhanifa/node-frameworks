@@ -1,4 +1,4 @@
-const users = require("../users.json");
+let users = require("../users.json");
 
 const getUsers = (req, res) => {
   res.send(users);
@@ -15,5 +15,10 @@ const createUser = (req, res) => {
   users.push(body);
   res.send(users);
 };
+const deleteUser = (req, res) => {
+  const { id } = req.params;
+  users = users.filter((u) => u.id !== Number(id));
+  res.send(users);
+};
 
-module.exports = { getUsers, getUser, createUser };
+module.exports = { getUsers, getUser, createUser, deleteUser };
