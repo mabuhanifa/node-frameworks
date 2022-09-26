@@ -30,7 +30,7 @@ const createUser = (req, res) => {
     !body.address ||
     !body.photoUrl
   ) {
-    res.send("please fill every properties");
+    res.status(405).send("please fill every properties");
   } else {
     users.push(body);
     res.send(users);
