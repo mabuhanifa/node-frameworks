@@ -22,8 +22,19 @@ const getRandomUser = (req, res) => {
 const createUser = (req, res) => {
   const id = Math.max(...users.map((d) => d.id));
   const body = req.body;
-  users.push(body);
-  res.send(users);
+  if (
+    !body.id ||
+    !body.name ||
+    !body.gender ||
+    !body.contact ||
+    !body.address ||
+    !body.photoUrl
+  ) {
+    res.send("please fill every properties");
+  } else {
+    users.push(body);
+    res.send(users);
+  }
 };
 const deleteUser = (req, res) => {
   const { id } = req.params;

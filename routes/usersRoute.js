@@ -1,7 +1,6 @@
 const express = require("express");
 const {
   getUsers,
-  getUser,
   createUser,
   deleteUser,
   updateUser,
@@ -14,7 +13,7 @@ router.route("/random").get(getRandomUser);
 
 router.route("/all").get(getUsers);
 
-router.route("/").post(createUser);
+router.route("/save").post(createUser);
 
 router.route("/:id").delete(deleteUser).patch(updateUser);
 
