@@ -4,9 +4,13 @@ const getUsers = (req, res) => {
   res.send(users);
 };
 
-const getUser = (req, res) => {
-  const { id } = req.params;
-  const user = users.find((u) => u.id === Number(id));
+const getRandomUser = (req, res) => {
+  function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  const length = users.length;
+  const rndInt = random(1, length);
+  const user = users.find((u) => u.id === Number(rndInt));
   res.send(user);
 };
 
@@ -34,4 +38,10 @@ const updateUser = (req, res) => {
   user.photoUrl = body.photoUrl ? body.photoUrl : user.photoUrl;
   res.send(user);
 };
-module.exports = { getUsers, getUser, createUser, deleteUser, updateUser };
+module.exports = {
+  getUsers,
+  getRandomUser,
+  createUser,
+  deleteUser,
+  updateUser,
+};

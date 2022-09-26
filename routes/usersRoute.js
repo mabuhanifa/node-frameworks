@@ -5,12 +5,17 @@ const {
   createUser,
   deleteUser,
   updateUser,
+  getRandomUser,
 } = require("../controllers/usersController");
 
 const router = express.Router();
 
-router.route("/").get(getUsers).post(createUser);
+router.route("/random").get(getRandomUser);
 
-router.route("/:id").get(getUser).delete(deleteUser).patch(updateUser);
+router.route("/all").get(getUsers);
+
+router.route("/").post(createUser);
+
+router.route("/:id").delete(deleteUser).patch(updateUser);
 
 module.exports = router;
