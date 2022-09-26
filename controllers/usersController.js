@@ -1,7 +1,12 @@
 let users = require("../users.json");
 
 const getUsers = (req, res) => {
-  res.send(users);
+  const { limit } = req.query;
+  if (limit) {
+    res.send(users.slice(0, Number(limit)));
+  } else {
+    res.send(users);
+  }
 };
 
 const getRandomUser = (req, res) => {
@@ -15,6 +20,7 @@ const getRandomUser = (req, res) => {
 };
 
 const createUser = (req, res) => {
+  const id = Math.max(...users.map((d) => d.id));
   const body = req.body;
   users.push(body);
   res.send(users);
