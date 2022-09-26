@@ -10,4 +10,10 @@ const getUser = (req, res) => {
   res.send(user);
 };
 
-module.exports = { getUsers, getUser };
+const createUser = (req, res) => {
+  const body = req.body;
+  users.push(body);
+  res.send(users);
+};
+
+module.exports = { getUsers, getUser, createUser };
