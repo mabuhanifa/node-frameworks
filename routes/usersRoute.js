@@ -15,6 +15,8 @@ router.route("/all").get(getUsers);
 
 router.route("/save").post(createUser);
 
-router.route("/:id").delete(deleteUser).patch(updateUser);
+router.route("/update").patch(updateUser);
+
+router.route("/:id").delete(deleteUser);
 
 module.exports = router;
