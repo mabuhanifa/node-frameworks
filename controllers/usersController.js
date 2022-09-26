@@ -37,7 +37,7 @@ const createUser = (req, res) => {
   }
 };
 const deleteUser = (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
   users = users.filter((u) => u.id !== Number(id));
   res.send(users);
 };
