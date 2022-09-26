@@ -39,7 +39,11 @@ const createUser = (req, res) => {
 const deleteUser = (req, res) => {
   const { id } = req.body;
   users = users.filter((u) => u.id !== Number(id));
-  res.send(users);
+  if (!id) {
+    res.status(405).send("please provide an id");
+  } else {
+    res.send(users);
+  }
 };
 
 const updateUser = (req, res) => {
