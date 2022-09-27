@@ -33,7 +33,10 @@ const createUser = (req, res) => {
     res.status(405).send("please fill every properties");
   } else {
     users.push(body);
-    res.send(users);
+    const sorted = users.sort((a, b) => {
+      return a.id - b.id;
+    });
+    res.send(sorted);
   }
 };
 
@@ -94,6 +97,7 @@ const bulkUpdate = (req, res) => {
       users[index] = updatedUser;
     }
   }
+
   res.send(users);
 };
 
