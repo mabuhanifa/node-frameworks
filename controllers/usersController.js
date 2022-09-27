@@ -77,31 +77,24 @@ const bulkUpdate = (req, res) => {
   length = body.length;
 
   for (let i = 0; i < length; i++) {
-    if (
-      !body[i].id ||
-      !body[i].name ||
-      !body[i].gender ||
-      !body[i].contact ||
-      !body[i].address ||
-      !body[i].photoUrl
-    ) {
-      res.status(405).send("please fill every properties");
+    if (!body[i].id) {
+      res.status(405).send("please provide an id");
     } else {
       let user = users.find((u) => u.id === Number(body[i].id));
-      user.name = body[i].name;
-      user.gender = body[i].gender;
-      user.contact = body[i].contact;
-      user.address = body[i].address;
-      user.photoUrl = body[i].photoUrl;
-      users = users.filter((user) => user.id !== Number(body[i].id));
-      users.push(user);
+      let index = users.findIndex((u) => u.id === Number(body[i].id));
+
+      let updatedUser = {
+        id: Number(body[i].id),
+        name: body[i].name ? body[i].name : user.name,
+        gender: body[i].gender ? body[i].gender : user.gender,
+        contact: body[i].contact ? body[i].contact : user.contact,
+        address: body[i].address ? body[i].address : user.address,
+        photoUrl: body[i].photoUrl ? body[i].photoUrl : user.photoUrl,
+      };
+      users[index] = updatedUser;
     }
   }
-
-  const sorted = users.sort((a, b) => {
-    return a.id - b.id;
-  });
-  res.send(sorted);
+  res.send(users);
 };
 
 module.exports = {
