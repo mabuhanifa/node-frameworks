@@ -56,22 +56,15 @@ const updateUser = (req, res) => {
   const id = body.id;
 
   const user = users.find((u) => u.id === Number(id));
-  if (
-    !body.id ||
-    !body.name ||
-    !body.gender ||
-    !body.contact ||
-    !body.address ||
-    !body.photoUrl
-  ) {
-    res.status(405).send("please fill every properties");
+  if (!body.id) {
+    res.status(405).send("please provide an id");
   } else {
     user.id = id;
-    user.name = body.name;
-    user.gender = body.gender;
-    user.contact = body.contact;
-    user.address = body.address;
-    user.photoUrl = body.photoUrl;
+    user.name = body.name ? body.name : user.name;
+    user.gender = body.gender ? body.gender : user.gender;
+    user.contact = body.contact ? body.contact : user.contact;
+    user.address = body.address ? body.address : user.address;
+    user.photoUrl = body.photoUrl ? body.photoUrl : user.photoUrl;
     res.send(user);
   }
 };
