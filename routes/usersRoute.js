@@ -5,6 +5,7 @@ const {
   deleteUser,
   updateUser,
   getRandomUser,
+  bulkUpdate,
 } = require("../controllers/usersController");
 
 const router = express.Router();
@@ -16,6 +17,8 @@ router.route("/all").get(getUsers);
 router.route("/save").post(createUser);
 
 router.route("/update").patch(updateUser);
+
+router.route("/bulk-update").patch(bulkUpdate);
 
 router.route("/delete").delete(deleteUser);
 

@@ -36,6 +36,7 @@ const createUser = (req, res) => {
     res.send(users);
   }
 };
+
 const deleteUser = (req, res) => {
   const { id } = req.body;
   users = users.filter((u) => u.id !== Number(id));
@@ -71,10 +72,43 @@ const updateUser = (req, res) => {
     res.send(user);
   }
 };
+const bulkUpdate = (req, res) => {
+  const body = req.body;
+  length = body.length;
+
+  for (let i = 0; i < length; i++) {
+    if (
+      !body[i].id ||
+      !body[i].name ||
+      !body[i].gender ||
+      !body[i].contact ||
+      !body[i].address ||
+      !body[i].photoUrl
+    ) {
+      res.status(405).send("please fill every properties");
+    } else {
+      let user = users.find((u) => u.id === Number(body[i].id));
+      user.name = body[i].name;
+      user.gender = body[i].gender;
+      user.contact = body[i].contact;
+      user.address = body[i].address;
+      user.photoUrl = body[i].photoUrl;
+      users = users.filter((user) => user.id !== Number(body[i].id));
+      users.push(user);
+    }
+  }
+
+  const sorted = users.sort((a, b) => {
+    return a.id - b.id;
+  });
+  res.send(sorted);
+};
+
 module.exports = {
   getUsers,
   getRandomUser,
   createUser,
   deleteUser,
   updateUser,
+  bulkUpdate,
 };
