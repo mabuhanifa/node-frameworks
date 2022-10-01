@@ -1,5 +1,9 @@
 let users = require("../users.json");
 
+/** 
+ @api get all users
+**/
+
 const getUsers = (req, res) => {
   const { limit } = req.query;
   if (limit) {
