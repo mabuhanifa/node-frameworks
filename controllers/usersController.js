@@ -13,6 +13,9 @@ const getUsers = (req, res) => {
   }
 };
 
+/** 
+ @api get random user users
+**/
 const getRandomUser = (req, res) => {
   function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -72,6 +75,7 @@ const updateUser = (req, res) => {
     res.send(user);
   }
 };
+
 const bulkUpdate = (req, res) => {
   const body = req.body;
   length = body.length;
