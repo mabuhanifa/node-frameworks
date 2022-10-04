@@ -14,7 +14,7 @@ const getUsers = (req, res) => {
 };
 
 /** 
- @api get random user users
+ @api get random user 
 **/
 const getRandomUser = (req, res) => {
   function random(min, max) {
@@ -26,6 +26,9 @@ const getRandomUser = (req, res) => {
   res.send(user);
 };
 
+/** 
+ @api create  user
+**/
 const createUser = (req, res) => {
   const id = Math.max(...users.map((d) => d.id));
   const body = req.body;
